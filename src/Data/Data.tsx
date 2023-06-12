@@ -1,6 +1,6 @@
 export const Categories = ["All", "Custom", "ICP", "Mission", "Product"];
 
-export const Toptic = [
+export const Topic = [
   {
     id: 1138,
     business_id: 79,

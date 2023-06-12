@@ -1,25 +1,71 @@
 import { IoIosArrowDropright } from "react-icons/io";
-import { Categories } from "../../Data/Data";
-const DashboardUI = () => {
+import { Categories, Topic } from "../../Data/Data";
+import { HiOutlinePencil } from "react-icons/hi";
+import { useState } from "react";
+const Dashboard = () => {
+  const [selectedCategory, setSelectedCategory] = useState("All");
   return (
-    <div className="w-full h-full p-5">
-      <h1 className="text-xl md:text-3xl font-bold">Categories</h1>
-      <div className="flex w-full h-full justify-center mt-8">
-        <div className="w-full md:w-11/12 h-full bg-white shadow-md rounded-md overflow-x-auto">
-          <div className="flex flex-wrap justify-between items-center md:h-16 px-2 border-b-2">
-            <div className="flex w-full md:w-2/4 justify-between">
-              {Categories.map((category, i) => (
-                <div
-                  key={i}
-                  className="flex w-full md:w-auto md:flex-initial gap-x-2 bg-red-500 items-center text-lg font-semibold justify-center py-2 px-4"
-                >
-                  <p>{category}</p>
-                </div>
-              ))}
-            </div>
-            <button className="flex px-4 p-2 rounded-lg bg-primary shadow-md items-center gap-x-2 text-xl text-white hover:scale-105 transition-all ease-in-out mt-4 md:mt-0">
-              <p>Add Topic</p> <IoIosArrowDropright />
-            </button>
+    <div className="w-full h-5/6 ">
+      <div className="flex w-full justify-center items-center flex-col">
+        <h1 className="text-xl underline  md:text-2xl font-bold p-2 w-11/12">
+          Categories
+        </h1>
+        <div className="w-11/12 flex justify-between items-center md:h-16 px-2 bg-white rounded-t-md mt-2 shadow-md border ">
+          <div className="flex w-full md:w-2/4 justify-between ">
+            {Categories?.map((category, i) => (
+              <div
+                key={i}
+                className="flex cursor-pointer w-32 md:w-auto gap-x-2 items-center text-md font-semibold justify-center py-2 px-4"
+                onClick={() => setSelectedCategory(category)}
+              >
+                <p>{category}</p>
+              </div>
+            ))}
+          </div>
+          <button className="flex px-4 p-2 rounded-lg bg-primary shadow-md items-center gap-x-2 text-xl text-white hover:scale-105 transition-all ease-in-out">
+            <p>Add Topic</p> <IoIosArrowDropright />
+          </button>
+        </div>
+        <div className="w-11/12 bg-gray-100 p-2 border-b text-sm text-primary font-semibold shadow-md border-x">
+          <h1>Recommended Topics</h1>
+        </div>
+        <div className="w-11/12 h-full max-h-[70vh] bg-white shadow-md border rounded-b-md overflow-x-hidden">
+          <div className="w-full h-full overflow-y-auto">
+            {Topic?.map(
+              (topic, i) =>
+                (selectedCategory === "All" ||
+                  selectedCategory === topic.category) && (
+                  <div
+                    key={i}
+                    className="flex  w-full justify-between items-center p-3 border-b text-sm text-gray-600 font-semibold"
+                  >
+                    <div className="flex flex-col gay-y-2">
+                      <p>{topic.topic}</p>
+                      <ul className="flex mt-2">
+                        {topic?.keywords?.map((tag, i) => (
+                          <li
+                            key={i}
+                            className={`${
+                              i % 3 === 0
+                                ? "text-yellow-500 border-yellow-500 border-2 bg-yellow-50"
+                                : i % 3 === 1
+                                ? "text-green-500 border-green-500 border-2 bg-green-50"
+                                : "text-red-500 border-red-500 border-2 bg-red-50"
+                            } text-xs  px-2 py-1 rounded-lg mr-2`}
+                          >
+                            {tag}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="flex gap-x-4">
+                      <button className="text-md text-white bg-primary px-3 py-2 rounded-md flex gap-x-2 items-center ">
+                        Write <HiOutlinePencil />
+                      </button>
+                    </div>
+                  </div>
+                )
+            )}
           </div>
         </div>
       </div>
@@ -27,4 +73,4 @@ const DashboardUI = () => {
   );
 };
 
-export default DashboardUI;
+export default Dashboard;
