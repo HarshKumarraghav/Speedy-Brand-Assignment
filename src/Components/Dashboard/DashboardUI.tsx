@@ -2,8 +2,14 @@ import { IoIosArrowDropright } from "react-icons/io";
 import { Categories, Topic } from "../../Data/Data";
 import { HiOutlinePencil } from "react-icons/hi";
 import { useState } from "react";
+import AddTopicModal from "./AddTopicModal";
 const Dashboard = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [addTopicModal, setAddTopicModal] = useState(false);
+  const [topic, setTopic] = useState("");
+  const [tags, setTags] = useState([]);
+  const [tagInput, setTagInput] = useState("");
+
   return (
     <div className="w-full h-5/6 ">
       <div className="flex w-full justify-center items-center flex-col">
@@ -11,18 +17,26 @@ const Dashboard = () => {
           Categories
         </h1>
         <div className="w-11/12 flex justify-between items-center md:h-16 px-2 bg-white rounded-t-md mt-2 shadow-md border ">
-          <div className="flex w-full md:w-2/4 justify-between ">
+          <div className="flex w-full md:w-2/4 justify-between">
             {Categories?.map((category, i) => (
               <div
                 key={i}
-                className="flex cursor-pointer w-32 md:w-auto gap-x-2 items-center text-md font-semibold justify-center py-2 px-4"
+                className={`flex cursor-pointer w-32 md:w-auto gap-x-2 items-center text-md font-semibold justify-center py-2 px-4 ${
+                  selectedCategory === category
+                    ? "bg-primary text-white rounded-md"
+                    : ""
+                }`}
                 onClick={() => setSelectedCategory(category)}
               >
                 <p>{category}</p>
               </div>
             ))}
           </div>
-          <button className="flex px-4 p-2 rounded-lg bg-primary shadow-md items-center gap-x-2 text-xl text-white hover:scale-105 transition-all ease-in-out">
+
+          <button
+            className="flex px-4 p-2 rounded-lg bg-primary  items-center gap-x-2 text-xl text-white active:scale-95 transition-all ease-in-out"
+            onClick={() => setAddTopicModal(true)}
+          >
             <p>Add Topic</p> <IoIosArrowDropright />
           </button>
         </div>
@@ -69,6 +83,16 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+      <AddTopicModal
+        tags={tags}
+        setTags={setTags}
+        topic={topic}
+        setTopic={setTopic}
+        tagInput={tagInput}
+        setTagInput={setTagInput}
+        addTopicModal={addTopicModal}
+        setAddTopicModal={setAddTopicModal}
+      />
     </div>
   );
 };
