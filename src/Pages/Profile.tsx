@@ -1,8 +1,6 @@
-import DashboardUI from "../Components/Dashboard/DashboardUI";
 import Header from "../Components/Navigation/Header";
 import Sidebar from "../Components/Navigation/Sidebar";
-
-const Dashboard = () => {
+const Profile = () => {
   return (
     <>
       <div className="flex flex-col h-screen bg-slate-50">
@@ -10,7 +8,7 @@ const Dashboard = () => {
           <Sidebar />
           <main className="flex-1 bg-background ">
             <Header />
-            <DashboardUI />
+            <div>main</div>
           </main>
         </div>
       </div>
@@ -18,4 +16,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Profile;

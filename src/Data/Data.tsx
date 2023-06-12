@@ -1,4 +1,6 @@
-export const data = [
+export const Categories = ["All", "Custom", "ICP", "Mission", "Product"];
+
+export const Toptic = [
   {
     id: 1138,
     business_id: 79,
