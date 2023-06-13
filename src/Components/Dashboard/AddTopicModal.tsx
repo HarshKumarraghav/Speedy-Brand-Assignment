@@ -91,13 +91,13 @@ const AddTopicModal = ({
               placeholder="Enter your topic"
               className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
             />
-            <p className="text-xs text-gray-500">*Press enter to add a tag</p>
+            <p className="text-xs text-primary">*Press enter to add a tag</p>
           </div>
 
           <div className="w-full flex justify-end gap-x-3">
             <button
               onClick={() => setAddTopicModal(false)}
-              className="w-32 bg-gray-400 text-white py-2 rounded-md font-semibold"
+              className="w-32 bg-gray-300  py-2 rounded-md font-semibold"
             >
               Cancel
             </button>

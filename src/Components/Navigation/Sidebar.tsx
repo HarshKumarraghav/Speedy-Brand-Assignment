@@ -12,7 +12,7 @@ const Sidebar = ({}: Props) => {
   const menus = [
     {
       name: "Dashboard",
-      link: `/`,
+      link: `/dashboard`,
       icon: MdOutlineDashboard,
     },
     {

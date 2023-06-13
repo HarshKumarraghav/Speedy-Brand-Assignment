@@ -5,6 +5,7 @@ import History from "./Pages/History";
 import Socails from "./Pages/Socails";
 import Account from "./Pages/Account";
 import Profile from "./Pages/Profile";
+import Login from "./Components/Auth/Login";
 
 function App() {
   const [isMobile, setIsMobile] = useState(false);
@@ -36,7 +37,8 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Dashboard />} />
+      <Route path="/" element={<Login />} />
+      <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/history" element={<History />} />
       <Route path="/social" element={<Socails />} />
       <Route path="/profile" element={<Profile />} />
