@@ -118,7 +118,7 @@ const [finalTopic] = useState(FinalTopics());
         setTagInput={setTagInput}
         addTopicModal={addTopicModal}
         setAddTopicModal={setAddTopicModal}
-
+        FinalTopics={FinalTopics}
       />
     </div>
   );

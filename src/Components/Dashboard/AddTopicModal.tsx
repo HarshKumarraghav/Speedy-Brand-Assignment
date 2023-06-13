@@ -10,6 +10,7 @@ type AddTopicModalProps = {
   setTopic: (value: string) => void;
   addTopicModal: boolean;
   setAddTopicModal: (value: boolean) => void;
+  FinalTopics: any;
 };
 const AddTopicModal = ({
   tags,
@@ -20,6 +21,7 @@ const AddTopicModal = ({
   setTopic,
   addTopicModal,
   setAddTopicModal,
+  FinalTopics,
 }: AddTopicModalProps) => {
 /**
  * This function creates a custom category with a random ID, adds it to a list of topics stored in
@@ -41,6 +43,7 @@ const AddTopicModal = ({
       setTags([]);
       setAddTopicModal(false);
       localStorage.setItem("Topic", JSON.stringify(Topic));
+      FinalTopics();
     }
   };
 
