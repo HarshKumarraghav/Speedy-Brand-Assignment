@@ -3,13 +3,39 @@ import { Categories, Topic } from "../../Data/Data";
 import { HiOutlinePencil } from "react-icons/hi";
 import { useState } from "react";
 import AddTopicModal from "./AddTopicModal";
+
 const Dashboard = () => {
+/* These lines of code are initializing state variables using the `useState` hook. */
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [addTopicModal, setAddTopicModal] = useState(false);
   const [topic, setTopic] = useState("");
   const [tags, setTags] = useState([]);
   const [tagInput, setTagInput] = useState("");
 
+/**
+ * The function returns a merged array of predefined topics and custom topics retrieved from local
+ * storage.
+ * @returns The function `FinalTopics` returns an array that contains the topics from the `Topic` array
+ * and the `CustomTopic` array retrieved from the local storage using `JSON.parse()`. The
+ * `console.log()` statements are used to log the `CustomTopic` array, the `Topic` array, and the
+ * `FinalTopic` array to the console for debugging purposes.
+ */
+const FinalTopics = () => {
+  const CustomTopic = JSON.parse(localStorage.getItem("Topic") || "[]");
+  console.log(CustomTopic , "topic", Topic);
+  const FinalTopic = [...Topic, ...CustomTopic];
+  console.log(FinalTopic);
+  return FinalTopic;
+};
+/* `const [finalTopic] = useState(FinalTopics());` is initializing a state variable `finalTopic` using
+the `useState` hook. The initial value of `finalTopic` is set to the return value of the
+`FinalTopics` function, which is an array of topics retrieved from local storage and merged with the
+predefined topics. The `useState` hook returns an array with two elements: the current state value
+(`finalTopic`) and a function to update the state value. However, in this case, the update function
+is not used since the state value is not expected to change during the component's lifecycle. The
+destructuring assignment syntax is used to extract the first element of the array (`finalTopic`) and
+assign it to the `finalTopic` constant. */
+const [finalTopic] = useState(FinalTopics());
   return (
     <div className="w-full h-5/6 ">
       <div className="flex w-full justify-center items-center flex-col">
@@ -45,7 +71,7 @@ const Dashboard = () => {
         </div>
         <div className="w-11/12 h-full max-h-[70vh] bg-white shadow-md border rounded-b-md overflow-x-hidden">
           <div className="w-full h-full overflow-y-auto">
-            {Topic?.map(
+            {finalTopic?.map(
               (topic, i) =>
                 (selectedCategory === "All" ||
                   selectedCategory === topic.category) && (
@@ -56,7 +82,7 @@ const Dashboard = () => {
                     <div className="flex flex-col gay-y-2">
                       <p>{topic.topic}</p>
                       <ul className="flex mt-2">
-                        {topic?.keywords?.map((tag, i) => (
+                        {topic?.keywords?.map((tag: string, i: any) => (
                           <li
                             key={i}
                             className={`${
@@ -92,6 +118,7 @@ const Dashboard = () => {
         setTagInput={setTagInput}
         addTopicModal={addTopicModal}
         setAddTopicModal={setAddTopicModal}
+
       />
     </div>
   );
