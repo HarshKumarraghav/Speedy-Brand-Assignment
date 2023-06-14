@@ -18,7 +18,8 @@ const Login = () => {
         </h2>
         <form
           className="w-full flex flex-col justify-center items-center"
-          onSubmit={() => {
+          onSubmit={(e) => {
+            e.preventDefault();
             Router("/dashboard");
           }}
         >

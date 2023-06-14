@@ -13,7 +13,7 @@ function App() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768); // Adjust the breakpoint to your needs
+      setIsMobile(window.innerWidth <= 768);
     };
 
     // Add event listener to handle window resize
