@@ -1,6 +1,6 @@
 import { IoCloseSharp } from "react-icons/io5";
 
- /* The type defines the props for an AddTopicModal component in a TypeScript React application. */
+/* The type defines the props for an AddTopicModal component in a TypeScript React application. */
 type AddTopicModalProps = {
   tags: string[];
   setTags: any;
@@ -10,7 +10,8 @@ type AddTopicModalProps = {
   setTopic: (value: string) => void;
   addTopicModal: boolean;
   setAddTopicModal: (value: boolean) => void;
-  FinalTopics: any;
+  setFinalTopic: (value: any) => void;
+  setSelectedCategory: (value: string) => void;
 };
 const AddTopicModal = ({
   tags,
@@ -21,15 +22,16 @@ const AddTopicModal = ({
   setTopic,
   addTopicModal,
   setAddTopicModal,
-  FinalTopics,
+  setSelectedCategory,
+  setFinalTopic,
 }: AddTopicModalProps) => {
 /**
  * This function creates a custom category with a random ID, adds it to a list of topics stored in
- * local storage, and resets the topic and tags state variables.
+ * local storage, and updates the state of the final topic list and selected category.
  */
   const handlerCustomCategory = () => {
     const random = Math.floor(Math.random() * 10000) + 1;
-    const Topic = JSON.parse(localStorage.getItem("Topic") || "[]");
+    const Topic = JSON.parse(localStorage.getItem("AllTopic") || "[]");
     const customCategory = {
       id: random,
       business_id: 79,
@@ -42,31 +44,33 @@ const AddTopicModal = ({
       setTopic("");
       setTags([]);
       setAddTopicModal(false);
-      localStorage.setItem("Topic", JSON.stringify(Topic));
-      FinalTopics();
+      localStorage.setItem("AllTopic", JSON.stringify(Topic));
+      const _finalTopic = JSON.parse(localStorage.getItem("AllTopic") || "");
+      setFinalTopic(_finalTopic);
+      setSelectedCategory("Custom");
     }
   };
 
-/**
- * The function handleClose sets the state of AddTopicModal to false if the event target's id is
- * "modelContainer".
- * @param {any} e - The parameter "e" is an event object that is passed to the function. It is likely
- * an event object that is triggered when the user interacts with the UI, such as clicking on an
- * element.
- */
+  /**
+   * The function handleClose sets the state of AddTopicModal to false if the event target's id is
+   * "modelContainer".
+   * @param {any} e - The parameter "e" is an event object that is passed to the function. It is likely
+   * an event object that is triggered when the user interacts with the UI, such as clicking on an
+   * element.
+   */
   const handleClose = (e: any) => {
     if (e.target.id === "modelContainer") {
       setAddTopicModal(false);
     }
   };
 
-/**
- * This function adds a new tag to an array of tags when the "Enter" key is pressed in a tag input
- * field.
- * @param {any} event - The `event` parameter is an object that represents the event that triggered the
- * function. In this case, it is likely a keyboard event, specifically checking if the "Enter" key was
- * pressed.
- */
+  /**
+   * This function adds a new tag to an array of tags when the "Enter" key is pressed in a tag input
+   * field.
+   * @param {any} event - The `event` parameter is an object that represents the event that triggered the
+   * function. In this case, it is likely a keyboard event, specifically checking if the "Enter" key was
+   * pressed.
+   */
   const handleTagInput = (event: any) => {
     if (event.key === "Enter") {
       event.preventDefault();
@@ -77,17 +81,17 @@ const AddTopicModal = ({
       }
     }
   };
-/**
- * This function removes a specific tag from an array of tags and updates the state with the new array.
- * @param {string} tag - The `tag` parameter is a string representing the tag that needs to be removed
- * from the `tags` array. The function `handleTagRemove` filters the `tags` array to remove the tag
- * that matches the `tag` parameter and then updates the state of the `tags` array using the
- */
+  /**
+   * This function removes a specific tag from an array of tags and updates the state with the new array.
+   * @param {string} tag - The `tag` parameter is a string representing the tag that needs to be removed
+   * from the `tags` array. The function `handleTagRemove` filters the `tags` array to remove the tag
+   * that matches the `tag` parameter and then updates the state of the `tags` array using the
+   */
   const handleTagRemove = (tag: string) => {
     const updatedTags = tags.filter((t) => t !== tag);
     setTags(updatedTags);
   };
-/* This line of code is checking if the `addTopicModal` prop is `false`. If it is `false`, it
+  /* This line of code is checking if the `addTopicModal` prop is `false`. If it is `false`, it
 immediately returns `null`, effectively rendering nothing. This is a common pattern in React
 components to conditionally render content based on the value of a prop or state variable. In this
 case, if the `addTopicModal` prop is `false`, the modal is not displayed. */

@@ -6,6 +6,7 @@ import Socails from "./Pages/Socails";
 import Account from "./Pages/Account";
 import Profile from "./Pages/Profile";
 import Login from "./Components/Auth/Login";
+import WriteTopic from "./Pages/WriteTopic";
 
 function App() {
   const [isMobile, setIsMobile] = useState(false);
@@ -43,6 +44,7 @@ function App() {
       <Route path="/social" element={<Socails />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/logout" element={<Account />} />
+      <Route path="/writetopic/:topicid" element={<WriteTopic/>}/>
     </Routes>
   );
 }
