@@ -6,7 +6,7 @@ import {
   FaStrikethrough,
   FaSquareRootAlt,
 } from "react-icons/fa";
-import { MdAdd, MdImage, MdPublish, MdSave } from "react-icons/md";
+import { MdAdd, MdImage } from "react-icons/md";
 import { useParams } from "react-router-dom";
 
 const WriteTopicUI = () => {
